@@ -1,0 +1,14 @@
+.quienes-somos {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.quienes-somos h2 {
+  color: #333;
+}
+
+.quienes-somos p {
+  line-height: 1.6;
+}

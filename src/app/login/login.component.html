@@ -1,0 +1,19 @@
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light " [style.backgrounImage]="'url('+ backgroundImage +')'">
+    <div class="col-md-4 bg-white p-4 rounded shadow background">
+        <h2 class="text-center">Iniciar Sesión</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+        </form>
+        <p class="text-center mt-3">
+            ¿No tienes una cuenta? <a routerLink="/register">Registrate aquí</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+body {
+    margin: 0; /* Asegúrate de que no haya márgenes */
+    height: 100vh; /* Asegúrate de que el cuerpo tenga altura completa */
+    background-size: cover;
+}
+
+
+.container-fluid {
+    background-color: rgba(255, 255, 255, 0.527); /* Fondo blanco con algo de transparencia */
+    border-radius: 10px;
+    padding: 20px; /* Añadir algo de espacio dentro del contenedor */
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #88ff00;
+    border-color: #88ff00;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
