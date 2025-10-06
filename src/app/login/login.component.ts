@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './auth-service.service';
-import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -10,31 +9,17 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  backgroundImage !: string;
+  showPass = false;
+  model = {
+    email: '',
+    password: '',
+    remember: true
+  };
 
-  constructor(private authService: AuthService, 
-    private router: Router,
-  private http: HttpClient) {}
-
-  onSubmit() {
-    this.authService.login(this.username, this.password).subscribe(
-      response => {
-        // Guarda el token y redirige
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/productos']);
-      },
-      error => {
-        console.error('Error de inicio de sesión', error);
-      }
-    );
-
-
-    this.http.get('/assets/Beneficios-del-jabon-artesanal.jpg', { responseType: 'text' })
-      .subscribe(url => {
-        this.backgroundImage = url;
-      });
+  onSubmit(f: NgForm) {
+    if (f.invalid) return;
+    // Aquí llamas a tu AuthService
+    // this.auth.login(this.model).subscribe(...)
+    console.log('LOGIN', this.model);
   }
 }
-

@@ -1,37 +1,91 @@
-<nav class="navbar navbar-expand-lg navbar-white " style="background-color: #29175a;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">{{titulo}}</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/app-producto']">Productos</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" href="/clientes">Clientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" [routerLink]="['/app-quienes-somos']" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Quienes Somos 
-            </a>
-          </li>
-        </ul>
-        <form class="d-flex" role="login">
-          <button class="btn btn-outline-success" type="submit" [routerLink]="['/login']" >Inicio de Sesión</button>
-        </form>
-        <form class="d-flex" role="login">
-          <button class="btn btn-outline-success" type="submit" [routerLink]="['/register']" >Registrar</button>
-        </form>
-  
+<nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/">Jabones Artesanales</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Links izquierda -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/producto" routerLinkActive="active">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/quienes-somos" routerLinkActive="active">Quiénes Somos</a>
+        </li>
+      </ul>
+
+      <!-- Acciones derecha -->
+      <div class="d-flex align-items-center gap-2 action-buttons">
+        <!-- Botón carrito -->
+        <button class="btn btn-outline-light rounded-pill px-3 position-relative"
+                type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                aria-controls="offcanvasCart">
+          <!-- icono carrito (SVG inline) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+               class="me-1" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M0 1a1 1 0 0 1 1-1h1.5a.5.5 0 0 1 .485.379L3.89 3H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 11H5a.5.5 0 0 1-.49-.402L3.01 2H1a1 1 0 0 1-1-1z"/>
+            <path d="M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+          </svg>
+          Carrito
+          <span class="badge rounded-pill bg-warning text-dark position-absolute top-0 start-100 translate-middle">
+            {{ (count$ | async) || 0 }}
+          </span>
+        </button>
+
+        <a class="btn btn-outline-light rounded-pill px-3" routerLink="/login">Inicio de Sesión</a>
+        <a class="btn btn-light rounded-pill px-3 text-primary fw-semibold" routerLink="/register">Registrar</a>
       </div>
     </div>
-  </nav>
-  
+  </div>
+</nav>
+
+<!-- Offcanvas del carrito -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasCartLabel">Tu carrito</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <ng-container *ngIf="(items$ | async) as items; else emptyCart">
+      <div *ngFor="let it of items; trackBy: trackById" class="cart-item">
+        <img [src]="it.image" alt="" />
+        <div class="flex-grow-1">
+          <div class="title">{{ it.title }}</div>
+          <div class="muted"> {{ it.price | currency:'COP':'symbol-narrow':'1.0-0' }} </div>
+        </div>
+
+        <div class="qty-controls">
+          <button class="btn btn-sm btn-outline-secondary" (click)="decrement(it)">–</button>
+          <span>{{ it.qty }}</span>
+          <button class="btn btn-sm btn-outline-secondary" (click)="increment(it)">+</button>
+        </div>
+
+        <button class="btn btn-sm btn-link text-danger" (click)="remove(it.id)">Quitar</button>
+      </div>
+
+      <hr>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <strong>Total</strong>
+        <strong>{{ (total$ | async) | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
+      </div>
+
+      <div class="d-grid gap-2">
+        <a routerLink="/pedido" class="btn btn-primary">Ir a pagar</a>
+        <button class="btn btn-outline-secondary" (click)="clear()">Vaciar carrito</button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyCart>
+      <p class="text-muted">Tu carrito está vacío.</p>
+    </ng-template>
+  </div>
+</div>

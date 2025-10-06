@@ -1,26 +1,61 @@
-body {
-    margin: 0; /* Asegúrate de que no haya márgenes */
-    height: 100vh; /* Asegúrate de que el cuerpo tenga altura completa */
-    background-size: cover;
+/* Fondo y centrado */
+.auth-wrapper {
+  min-height: calc(100vh - 80px); /* ajusta si tu header sticky mide distinto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(1200px 400px at 50% -10%, #eef2ff 0%, #ffffff 50%);
 }
 
-
-.container-fluid {
-    background-color: rgba(255, 255, 255, 0.527); /* Fondo blanco con algo de transparencia */
-    border-radius: 10px;
-    padding: 20px; /* Añadir algo de espacio dentro del contenedor */
+/* Tarjeta principal */
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  padding: 1.75rem;
 }
 
-h2 {
-    margin-bottom: 20px;
+/* Marca */
+.brand {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.brand h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.brand .lead {
+  color: #6b7280;
+  margin-top: .25rem;
 }
 
+/* Toggle de contraseña */
+.toggle-pass {
+  position: absolute;
+  right: .75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 999px;
+}
+
+/* Input states */
+.form-control {
+  border-radius: 12px;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 .25rem rgba(99,102,241,.2); /* morado suave */
+  border-color: #6366f1;
+}
+
+/* Botón principal */
 .btn-primary {
-    background-color: #88ff00;
-    border-color: #88ff00;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  border: none;
 }
-
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  filter: brightness(1.05);
 }

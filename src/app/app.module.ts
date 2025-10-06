@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
     EnvioComponent,
     LoginComponent,
     RegisterComponent,
-    QuienesSomosComponent
+    QuienesSomosComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

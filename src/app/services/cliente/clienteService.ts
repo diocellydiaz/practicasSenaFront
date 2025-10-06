@@ -9,5 +9,9 @@ export class ClienteService {
   constructor( private http: HttpClient ) { }
 
   private url = 'http://localhost:8080/api/clientes';
+
+  getCliente(){
+    //return t
+  }
   
 }

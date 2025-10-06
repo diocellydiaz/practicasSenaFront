@@ -1,0 +1,138 @@
+/* --- Estructura principal --- */
+.header {
+  background-color: #6c2bd9; /* Morado principal */
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Logo --- */
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo span {
+  color: #fff;
+}
+
+/* --- Navegación --- */
+.nav {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav a {
+  color: #e5e5e5;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* --- Botones de acción --- */
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Botón base */
+.btn {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Botón Iniciar Sesión */
+.btn--ghost {
+  color: #6c2bd9;
+  border: 2px solid #fff;
+  background-color: #fff;
+}
+
+.btn--ghost:hover {
+  background-color: transparent;
+  color: #fff;
+}
+
+/* Botón Registrar */
+.btn--primary {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background-color: #fff;
+  color: #6c2bd9;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .header__container {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.app-navbar{
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+}
+.app-navbar .nav-link{ color:#eef2ff; font-weight:500; }
+.app-navbar .nav-link.active, .app-navbar .nav-link:hover{ color:#fff; }
+.action-buttons{ gap:.75rem; }
+@media (max-width:991.98px){
+  .action-buttons{ width:100%; padding-top:.75rem; border-top:1px solid rgba(255,255,255,.15); }
+  .action-buttons .btn{ width:100%; }
+}
+
+/* Items del carrito */
+.cart-item{
+  display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;
+}
+.cart-item img{
+  width:56px; height:56px; object-fit:cover; border-radius:8px;
+}
+.cart-item .title{ font-weight:600; line-height:1.1; }
+.cart-item .muted{ color:#6b7280; font-size:.9rem; }
+.qty-controls{ display:flex; align-items:center; gap:.25rem; margin-right:.5rem; }
+.qty-controls span{ min-width:2ch; text-align:center; }
+
+

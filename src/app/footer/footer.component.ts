@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
    titulo = 'Jabones Artesanales';
+   year = new Date().getFullYear();
 }
+

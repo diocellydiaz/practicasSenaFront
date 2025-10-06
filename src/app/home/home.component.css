@@ -1,0 +1,187 @@
+/* Contenedor principal */
+.promos.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Encabezado */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.section-header .link {
+  color: #6c2bd9;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.section-header .link:hover {
+  color: #4506cb;
+}
+
+/* Grilla */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  animation: fadeUp 0.8s ease-in-out;
+}
+
+/* Tarjeta */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFadeIn 0.8s ease forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen */
+.card_image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card_image img {
+  transform: scale(1.05);
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #6c2bd9;
+  color: white;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Cuerpo */
+.card_body {
+  padding: 1rem;
+  flex: 1;
+}
+
+.card_title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.card_subtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.card_price {
+  font-weight: 700;
+  color: #6c2bd9;
+  font-size: 1rem;
+}
+
+.card_footer {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.8rem 1rem 1rem;
+  border-top: 1px solid #eee;
+}
+
+/* quita estiramiento si lo tenías */
+.card_footer .btn { 
+  flex: 0 0 auto !important; 
+}
+
+/* separación fija entre botones (gana por especificidad y !important) */
+.card_footer .btn + .btn {
+  margin-left: 20px !important;
+}
+
+
+
+/* Botones */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #6c2bd9;
+  border: 1px solid #6c2bd9;
+}
+
+.btn--ghost:hover {
+  background: #6c2bd9;
+  color: white;
+}
+
+.btn--primary {
+  background: #6c2bd9;
+  color: white;
+  border: none;
+}
+
+.btn--primary:hover {
+  background: #4506cb;
+}
+
+/* --- 🎬 Animaciones --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

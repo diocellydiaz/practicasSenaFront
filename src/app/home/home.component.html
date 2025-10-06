@@ -1,0 +1,30 @@
+<section class="promos container">
+  <header class="section-header">
+    <h2>Promociones destacadas</h2>
+    <a [routerLink]="'/producto'" class="link">Ver todo</a>
+  </header>
+
+  <div class="grid">
+    <article class="card" *ngFor="let p of promos; trackBy: trackById">
+      <div class="card_image">
+        <img [src]="p.image" [alt]="p.title" loading="lazy" />
+        <span class="badge" *ngIf="p.badge as b">{{ b }}</span>
+      </div>
+
+      <div class="card_body">
+        <h3 class="card_title">{{ p.title }}</h3>
+        <p class="card_subtitle" *ngIf="p.subtitle">{{ p.subtitle }}</p>
+        <p class="card_price" *ngIf="p.price !== null && p.price !== undefined">
+          {{ p.price | currency:'COP':'symbol-narrow':'1.0-0' }}
+        </p>
+      </div>
+
+      <!-- ... dentro de cada card ... -->
+      <div class="card__footer">
+        <a [routerLink]="p.link || '/producto'" class="btn btn--ghost">Ver detalle</a>
+        <button class="btn btn--primary" type="button" (click)="addToCart(p)">Agregar</button>
+      </div>
+
+    </article>
+  </div>
+</section>

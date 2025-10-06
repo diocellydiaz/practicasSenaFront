@@ -1,32 +1,39 @@
-<div class="card border-primary mb-3">
-    <div class="card-header">Productos</div>
-    <div class="card-body text-primary">
-        <h5 class="card-title">Listado de Productos</h5>
-        <div class="my-2 text-left">
-            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/productos/form']">Crear Producto</button>
+<section class="productos container">
+  <header class="section-header">
+    <h2>Productos disponibles</h2>
+    <a class="btn btn--primary" routerLink="/productos/form">Crear producto</a>
+  </header>
+
+  <!-- ✅ Sin productos -->
+  <div *ngIf="(productos?.length ?? 0) === 0" class="alert">
+    No hay productos registrados actualmente.
+  </div>
+
+  <!-- ✅ Con productos -->
+  <div *ngIf="(productos?.length ?? 0) > 0" class="productos-list">
+    <div class="grid">
+      <article class="card" *ngFor="let p of productos; trackBy: trackById">
+        <div class="card_image">
+          <img [src]="p.image || 'assets/Beneficios-del-jabon-artesanal.jpg'"
+               [alt]="p.title || 'Producto'" />
+          <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
         </div>
-        <div *ngIf="productos?.length == 0" class="alert alert-info">
-            No hay registros en la base de datos!
+
+        <div class="card_body">
+          <h3 class="card_title">{{ p.title || 'Sin nombre' }}</h3>
+          <p class="card_subtitle" *ngIf="p.subtitle">{{ p.subtitle }}</p>
+          <p class="card_price">{{ (p.price ?? 0) | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+          <p class="card_stock" *ngIf="p.stock !== undefined">Stock: <strong>{{ p.stock }}</strong></p>
+          <p class="card_date" *ngIf="p.date">
+            <small>Fabricado el: {{ p.date | date:'dd/MM/yyyy' }}</small>
+          </p>
         </div>
-        <table class="table table-bordered table-striped" *ngIf="productos.length > 0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Fecha de Fabricación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let producto of productos">
-                    <td>{{producto.id_producto}}</td>
-                    <td>{{producto.nombre}}</td>
-                    <td>{{producto.precio}}</td>
-                    <td>{{producto.stock}}</td>
-                    <td>{{producto.fecha_fabricacion | date:"EEEE dd, MMMM yyyy"}}</td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="card_footer">
+          <button class="btn btn--ghost" (click)="editarProducto(p)">Editar</button>
+          <button class="btn btn--danger" (click)="eliminarProducto(p.id)">Eliminar</button>
+        </div>
+      </article>
     </div>
-</div>
+  </div>
+</section>

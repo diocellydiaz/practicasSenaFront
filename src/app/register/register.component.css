@@ -1,0 +1,95 @@
+/* Sección centrada y con respiración */
+.auth {
+  max-width: 780px;
+  margin: 24px auto 40px; /* deja espacio del header y del footer */
+  padding: 0 16px;
+}
+
+/* Título */
+.auth__title {
+  text-align: center;
+  margin: 6px 0 16px;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  color: #1f2937;
+}
+
+/* Tarjeta del formulario */
+.auth__card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  padding: 22px 24px;
+  display: grid;
+  gap: 16px;
+}
+
+/* Campos */
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.field input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 12px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+  background: #fafafa;
+}
+
+.field input:focus {
+  border-color: #6c2bd9;
+  box-shadow: 0 0 0 3px rgba(108, 43, 217, .15);
+  background: #fff;
+}
+
+/* Botón principal */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.btn--primary {
+  background: #6c2bd9;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(108, 43, 217, .25);
+}
+
+.btn--primary:hover { background: #4c1bbd; transform: translateY(-1px); }
+.btn--primary:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+/* Hint inferior */
+.auth__hint {
+  text-align: center;
+  margin: 6px 0 0;
+  color: #6b7280;
+}
+
+.auth__hint a {
+  color: #6c2bd9;
+  font-weight: 600;
+  text-decoration: none;
+}
+.auth__hint a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 520px) {
+  .auth__card { padding: 18px; }
+}

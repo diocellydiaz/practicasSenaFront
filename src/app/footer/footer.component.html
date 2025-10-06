@@ -1,9 +1,14 @@
-<footer class="footer bg-dark rounded-top text-center ">
-    <div class="container py-2">
-      <p class="text-white">
-        &copy;{{titulo}}
-      </p>
-  
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <strong>Jabones Artesanales</strong>
+      <small>© {{ year }} • Hecho con 💜</small>
     </div>
-  </footer>
-  
+
+    <nav class="footer__links">
+      <a routerLink="/productos">Productos</a>
+      <a routerLink="/quienes-somos">Quiénes Somos</a>
+      <a routerLink="/contacto">Contacto</a>
+    </nav>
+  </div>
+</footer>
