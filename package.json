@@ -1,14 +1,18 @@
 {
   "name": "proyecto-sena-front",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
-   "build": "npm install && npm run ng build -- --configuration=production",
-   "start": "npx serve -s dist/proyecto-sena-front -l $PORT",
-    "watch": "ng build --watch --configuration development",
+    "prebuild": "rm -rf node_modules/.cache || true",
+    "build": "ng build --configuration=production",
+    "start": "serve -s dist/proyecto-sena-front -l $PORT",
+    "watch": "ng build --watch --configuration=development",
     "test": "ng test"
   },
-  "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@angular/animations": "^16.2.0",
     "@angular/common": "^16.2.0",
@@ -35,6 +39,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "serve": "^14.2.1",
     "typescript": "~5.1.3"
   }
 }
