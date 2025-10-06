@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "build": "npm ci && npm run ng build --configuration=production",
-    "start": "npx serve -s dist/<NOMBRE_APP> -l $PORT",
+    "start": "npx serve -s dist/proyecto-sena-front -l $PORT",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
