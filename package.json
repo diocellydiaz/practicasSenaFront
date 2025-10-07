@@ -6,7 +6,7 @@
     "ng": "ng",
     "prebuild": "rm -rf node_modules/.cache || true",
     "build": "ng build --configuration=production",
-    "start": "serve -s dist/proyecto-sena-front -l $PORT",
+    "start": "serve -s dist/proyecto-sena-front -l tcp://0.0.0.0:$PORT",
     "watch": "ng build --watch --configuration=development",
     "test": "ng test"
   },
