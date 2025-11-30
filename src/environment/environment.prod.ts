@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mi-api.tu-dominio.com',
+  apiUrl: 'https://practicassenaback-production.up.railway.app',
   appName: 'MiApp',
 };
