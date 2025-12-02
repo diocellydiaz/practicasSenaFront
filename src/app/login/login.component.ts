@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ClienteService } from '../services/cliente/cliente.service';
 
 
 @Component({
@@ -9,17 +10,36 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  constructor(private clienteService: ClienteService) { }
+
   showPass = false;
   model = {
-    email: '',
+    correo_electronico: '',
     password: '',
-    remember: true
-  };
+    remember: true,
+    };
 
-  onSubmit(f: NgForm) {
-    if (f.invalid) return;
-    // Aquí llamas a tu AuthService
-    // this.auth.login(this.model).subscribe(...)
-    console.log('LOGIN', this.model);
+  mensaje= '';
+
+
+onLogin(): void {
+    this.mensaje = '';
+
+   const { correo_electronico, password } = this.model;
+    this.clienteService.login(correo_electronico, password)
+      .subscribe({
+        next: (resp) => {
+          this.mensaje = resp.mensaje || 'Login correcto';
+
+          // guardo el cliente en localStorage (sin password)
+          if (resp.cliente) {
+            localStorage.setItem('cliente', JSON.stringify(resp.cliente));
+          }
+        },
+        error: (err) => {
+          this.mensaje = err.error?.mensaje || 'Error en el login';
+        }
+      });
   }
 }

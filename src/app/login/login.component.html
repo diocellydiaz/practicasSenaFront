@@ -5,19 +5,19 @@
       <p class="lead m-0">Bienvenido de nuevo</p>
     </div>
 
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
       <!-- Email -->
       <div class="form-floating mb-3">
         <input
-          type="email"
+          type="correo_electronico"
           class="form-control"
-          id="email"
-          name="email"
-          [(ngModel)]="model.email"
+          id="correo_electronico"
+          name="correo_electronico"
+          [(ngModel)]="model.correo_electronico"
           required
-          email
-          #email="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" />
+          correo_electronico
+          #correo_electronico="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && correo_electronico.invalid }" />
         <label for="email">Correo electrónico</label>
         <div class="invalid-feedback">Ingresa un correo válido.</div>
       </div>
