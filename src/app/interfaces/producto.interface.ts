@@ -1,13 +1,22 @@
+// src/app/interfaces/producto.interface.ts
 export interface Producto {
-  id: number;
-  title: string;
+
+  // ===== Campos de la tabla en la BD =====
+  productoid?: number;
+  descripcion?: string;
+  nombre: string;
+  nombre_foto?: string;
+  precio: number;
+  categoriaid?: number;
+  clienteid?: number;
+  inventario_id?: number;
+  proveedorid?: number;
+
+  // ===== Campos usados SOLO en el front (home/promos) =====
+  id?: number;
+  title?: string;
   subtitle?: string;
-  price?: number;
-  image: string;
-  badge?: 'Nuevo' | 'Oferta' | 'Top';
+  image?: string;
+  badge?: string;
   link?: string;
-  stock?: number;
-  date?: Date;
 }
-
-

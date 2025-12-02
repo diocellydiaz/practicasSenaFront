@@ -1,7 +1,8 @@
 import { Component, OnInit, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Producto } from '../interfaces/producto.interface';
-import { ProductoService } from '../services/producto.service';
+import { ProductoService } from '../services/producto/producto.service';
+
 
 @Component({
   selector: 'app-producto',
@@ -9,12 +10,7 @@ import { ProductoService } from '../services/producto.service';
   styleUrls: ['./producto.component.css']
 })
 export class ProductoComponent implements OnInit {
-editarProducto(_t15: Producto) {
-throw new Error('Method not implemented.');
-}
-eliminarProducto(arg0: number) {
-throw new Error('Method not implemented.');
-}
+
   productos: Producto[] = [];
 
   constructor(
@@ -23,7 +19,11 @@ throw new Error('Method not implemented.');
   ) {}
 
   ngOnInit(): void {
-    this.productoService.getProductos()
+    this.cargarProductos();
+  }
+
+  private cargarProductos(): void {
+this.productoService.getProductos()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: items => this.productos = items,
@@ -31,5 +31,36 @@ throw new Error('Method not implemented.');
       });
   }
 
-  trackById(_: number, it: Producto) { return it.id; }
+  trackById(_: number, p: Producto) {
+    // para soportar productos de BD (productoid) y mocks (id)
+    return p.productoid ?? p.id;
+  }
+
+  editarProducto(p: Producto): void {
+    const id = p.productoid ?? p.id;
+    console.log('Editar producto', id, p);
+    // futuro: this.router.navigate(['/productos/form', id]);
+  }
+
+  eliminarProducto(p: Producto): void {
+    const id = p.productoid ?? p.id;
+    if (!id) {
+      console.warn('Producto sin id, no se puede eliminar');
+      return;
+    }
+
+    if (!confirm('¿Seguro que deseas eliminar este producto?')) {
+      return;
+    }
+
+
+    this.productoService.eliminarProducto(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => this.cargarProductos(),
+        error: (err: any) => console.error('Error al eliminar', err)
+      });
+
+    console.log('Aquí iría la llamada para eliminar el producto con id:', id);
+  }
 }

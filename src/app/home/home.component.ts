@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Producto } from '../interfaces/producto.interface';
-import { PROMOS } from '../mocks/producto.mock';
 import { CartService } from '../services/cart-service.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { CartService } from '../services/cart-service.service';
 })
 export class HomeComponent implements OnInit {
 
-  promos: Producto[] = PROMOS;
+  promos: Producto[] = [];
 
   trackById(_: number, item: Producto) { return item.id; }
 

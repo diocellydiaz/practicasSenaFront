@@ -1,37 +1,61 @@
 <section class="productos container">
   <header class="section-header">
     <h2>Productos disponibles</h2>
-    <a class="btn btn--primary" routerLink="/productos/form">Crear producto</a>
+    <!-- si no tienes formulario de creación, deja solo el título -->
+    <!-- <a class="btn btn--primary" routerLink="/productos/form">Crear producto</a> -->
   </header>
 
-  <!-- ✅ Sin productos -->
-  <div *ngIf="(productos?.length ?? 0) === 0" class="alert">
+  <!-- Sin productos -->
+  <div *ngIf="(productos.length === 0) " class="alert">
     No hay productos registrados actualmente.
   </div>
 
-  <!-- ✅ Con productos -->
-  <div *ngIf="(productos?.length ?? 0) > 0" class="productos-list">
+  <!-- Con productos -->
+  <div *ngIf="(productos.length > 0) " class="productos-list">
     <div class="grid">
       <article class="card" *ngFor="let p of productos; trackBy: trackById">
+        <!-- Imagen: nombre_foto (BD) o image (mock) -->
         <div class="card_image">
-          <img [src]="p.image || 'assets/Beneficios-del-jabon-artesanal.jpg'"
-               [alt]="p.title || 'Producto'" />
+          <img
+            [src]="p.nombre_foto ? 'assets/' + p.nombre_foto : (p.image || 'assets/Beneficios-del-jabon-artesanal.jpg')"
+            [alt]="p.nombre || p.title || 'Producto'"
+          />
           <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
         </div>
 
+        <!-- Info principal -->
         <div class="card_body">
-          <h3 class="card_title">{{ p.title || 'Sin nombre' }}</h3>
-          <p class="card_subtitle" *ngIf="p.subtitle">{{ p.subtitle }}</p>
-          <p class="card_price">{{ (p.price ?? 0) | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
-          <p class="card_stock" *ngIf="p.stock !== undefined">Stock: <strong>{{ p.stock }}</strong></p>
-          <p class="card_date" *ngIf="p.date">
-            <small>Fabricado el: {{ p.date | date:'dd/MM/yyyy' }}</small>
+          <h3 class="card_title">
+            {{ p.nombre || p.title || 'Sin nombre' }}
+          </h3>
+
+          <!-- Descripción desde BD -->
+          <p class="card_subtitle" *ngIf="p.descripcion || p.subtitle">
+            {{ p.descripcion || p.subtitle }}
+          </p>
+
+          <!-- Precio desde BD (precio) o mock (price) -->
+          <p class="card_price">
+            {{ p.precio | currency:'COP':'symbol-narrow':'1.0-0' }}
+          </p>
+
+          <!-- Info extra (opcional) -->
+          <p class="card_extra" *ngIf="p.categoriaid">
+            Categoría ID: {{ p.categoriaid }}
+          </p>
+          <p class="card_extra" *ngIf="p.inventario_id">
+            Inventario ID: {{ p.inventario_id }}
           </p>
         </div>
 
+        <!-- Acciones (si quieres modo admin aquí) -->
         <div class="card_footer">
-          <button class="btn btn--ghost" (click)="editarProducto(p)">Editar</button>
-          <button class="btn btn--danger" (click)="eliminarProducto(p.id)">Eliminar</button>
+          <button class="btn btn--ghost" type="button" (click)="editarProducto(p)">
+            Editar
+          </button>
+          <button class="btn btn--danger" type="button" (click)="eliminarProducto(p)">
+            Eliminar
+          </button>
         </div>
       </article>
     </div>

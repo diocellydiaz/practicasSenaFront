@@ -1,6 +1,25 @@
+<!-- Hero / Portada cliente -->
+<section class="hero">
+  <div class="hero__content">
+    <h1>Jabones Artesanales hechos con amor 🧼💜</h1>
+    <p>
+      Descubre jabones naturales, suaves con tu piel y perfectos para consentirte
+      o para regalar a quien más quieres.
+    </p>
+    <button class="btn btn--primary" routerLink="/producto">
+      Ver catálogo completo
+    </button>
+  </div>
+
+  <div class="hero__image">
+    <img src="assets/Beneficios-del-jabon-artesanal.jpg" alt="Jabones artesanales" />
+  </div>
+</section>
+
+<!-- Sección de promociones (vista cliente) -->
 <section class="promos container">
   <header class="section-header">
-    <h2>Promociones destacadas</h2>
+    <h2>Promociones destacadas para ti ✨</h2>
     <a [routerLink]="'/producto'" class="link">Ver todo</a>
   </header>
 
@@ -14,17 +33,23 @@
       <div class="card_body">
         <h3 class="card_title">{{ p.title }}</h3>
         <p class="card_subtitle" *ngIf="p.subtitle">{{ p.subtitle }}</p>
-        <p class="card_price" *ngIf="p.price !== null && p.price !== undefined">
-          {{ p.price | currency:'COP':'symbol-narrow':'1.0-0' }}
+        <p class="card_price" *ngIf="p.precio !== null && p.precio !== undefined">
+          {{ p.precio | currency:'COP':'symbol-narrow':'1.0-0' }}
         </p>
       </div>
 
-      <!-- ... dentro de cada card ... -->
-      <div class="card__footer">
-        <a [routerLink]="p.link || '/producto'" class="btn btn--ghost">Ver detalle</a>
-        <button class="btn btn--primary" type="button" (click)="addToCart(p)">Agregar</button>
+      <div class="card_footer">
+        <a [routerLink]="p.link || '/producto'" class="btn btn--ghost">
+          Ver detalle
+        </a>
+        <button
+          class="btn btn--primary"
+          type="button"
+          (click)="addToCart(p)"
+        >
+          Agregar
+        </button>
       </div>
-
     </article>
   </div>
 </section>

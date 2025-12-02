@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth-service.service';
+import { Cliente } from '../interfaces/cliente.interface';
+import { ClienteService } from '../services/cliente/cliente.service';
+import { NgForm } from '@angular/forms';
+//import { AuthService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-register',
@@ -9,22 +12,37 @@ import { AuthService } from '../services/auth-service.service';
 })
 export class RegisterComponent {
 
-  username: string = '';
-  email: string = '';
-  password: string = '';
+    mensaje = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  // Modelo que se va a mandar al backend
+  model: Cliente = {
+    id_cliente: undefined,
+    nombre: '',
+    apellido: '',
+    correo_electronico: '',
+    telefono: '',
+    cedula: undefined,
+    password: ''
+  };
+  
+  constructor(private clienteService: ClienteService) { }
 
-  onSubmit() {
-    this.authService.register({ username: this.username, password: this.password }).subscribe(
-      response => {
-        // Redirigir después del registro
-        this.router.navigate(['/login']);
+  onRegister(form: NgForm): void {
+    this.mensaje = '';
+
+    if (form.invalid) {
+      return;
+    }
+
+    this.clienteService.crearCliente(this.model).subscribe({
+      next: (resp) => {
+        this.mensaje = resp.mensaje || 'Cliente registrado correctamente';
+        form.resetForm(); // limpiar formulario
       },
-      error => {
-        console.error('Error de registro', error);
+      error: (err) => {
+        this.mensaje = err.error?.mensaje || 'Error al registrar el cliente';
       }
-    );
+    });
   }
 
 }
