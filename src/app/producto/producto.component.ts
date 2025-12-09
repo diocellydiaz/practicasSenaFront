@@ -22,14 +22,17 @@ export class ProductoComponent implements OnInit {
     this.cargarProductos();
   }
 
-  private cargarProductos(): void {
-this.productoService.getProductos()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: items => this.productos = items,
-        error: err => console.error('Error al obtener los productos:', err)
-      });
-  }
+private cargarProductos(): void {
+  this.productoService.getProductos()
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe({
+      next: (items) => {
+        console.log('Productos desde backend:', items);
+        this.productos = items;
+      },
+      error: (err) => console.error('Error al obtener los productos:', err)
+    });
+}
 
   trackById(_: number, p: Producto) {
     // para soportar productos de BD (productoid) y mocks (id)
@@ -63,4 +66,7 @@ this.productoService.getProductos()
 
     console.log('Aquí iría la llamada para eliminar el producto con id:', id);
   }
+
+  
+
 }
