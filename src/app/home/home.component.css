@@ -1,213 +1,201 @@
-/* Fondo solo para esta vista */
 :host {
   display: block;
-  background: #f5f3ff;
+  background: #f7f5ff;
   min-height: 100vh;
+  color: #221437;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ========= HERO (PORTADA) ========= */
-.hero {
+/* ===== CONTENEDOR GENERAL ===== */
+.section {
+  padding: 40px 5vw;
   max-width: 1200px;
-  margin: 2rem auto 1.5rem;
-  padding: 1.5rem 1rem;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
-  gap: 2.5rem;
+  margin: 0 auto;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 3rem;
+  padding: 60px 5vw 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.hero__content h1 {
-  font-size: 2.4rem;
+.hero__text h1 {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   font-weight: 800;
-  color: #2b2140;
-  margin-bottom: 0.8rem;
+  line-height: 1.1;
 }
 
-.hero__content p {
+.hero__text p {
+  margin: 1.2rem 0;
   font-size: 1rem;
-  color: #5a4f73;
-  margin-bottom: 1.3rem;
-  max-width: 520px;
+  color: #6a6281;
+}
+
+.btn-primary {
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  background: #6c4af2;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(82, 50, 230, 0.4);
+  transition: background 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: #5738d1;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(82, 50, 230, 0.45);
 }
 
 .hero__image img {
   width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 16px 35px rgba(30, 10, 80, 0.25);
+  max-width: 380px;
+  display: block;
+  margin-left: auto;
+  border-radius: 32px;
   object-fit: cover;
+  box-shadow: 0 18px 40px rgba(77, 54, 160, 0.35);
 }
 
-/* Responsive hero */
+/* ================= CATEGORÍAS ================= */
+
+.categorias-section {
+  mask-composite: section;
+}
+
+.categorias-section h2,
+.productos-section h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.categorias-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.categoria-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.4rem 1.1rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(31, 10, 80, 0.08);
+}
+
+.categoria-card img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  margin-bottom: 0.6rem;
+}
+
+.categoria-card p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #352855;
+}
+
+/* ================= PRODUCTOS ================= */
+
+.productos-section {
+  mask-composite: section;
+  padding-bottom: 60px;
+}
+
+.productos-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.producto-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(34, 15, 87, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.producto-card img {
+  width: 100%;
+  border-radius: 14px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 0.8rem;
+}
+
+.producto-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #251b3b;
+}
+
+.producto-card .precio {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #2fac57;
+}
+
+/* el botón de la card ocupa todo el ancho en móvil */
+.producto-card .btn-primary {
+  width: 100%;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets y pantallas medianas */
 @media (max-width: 900px) {
   .hero {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     text-align: center;
+    padding-top: 40px;
   }
 
-  .hero__content p {
+  .hero__image img {
+    margin: 0 auto;
+  }
+
+  .hero__text p {
+    max-width: 420px;
     margin-left: auto;
     margin-right: auto;
   }
 }
 
-/* ========= SECCIÓN PROMOS ========= */
-.promos.container {
-  max-width: 1200px;
-  margin: 0 auto 3rem;
-  padding: 0 1rem 2rem;
-}
-
-/* Encabezado de sección */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.section-header h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2b2140;
-}
-
-.section-header .link {
-  font-size: 0.9rem;
-  color: #6c3ef0;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.section-header .link:hover {
-  text-decoration: underline;
-}
-
-/* Grid de tarjetas */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-}
-
-/* ========= TARJETA DE PRODUCTO ========= */
-.card {
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(23, 11, 60, 0.12);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 35px rgba(23, 11, 60, 0.18);
-}
-
-/* Imagen */
-.card_image {
-  position: relative;
-  overflow: hidden;
-}
-
-.card_image img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-}
-
-.badge {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.9rem;
-  background: #ff4fb3;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-/* Contenido */
-.card_body {
-  padding: 0.9rem 1rem 0.5rem;
-}
-
-.card_title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #241b3d;
-  margin-bottom: 0.25rem;
-}
-
-.card_subtitle {
-  font-size: 0.85rem;
-  color: #7a6e96;
-  margin-bottom: 0.4rem;
-}
-
-.card_price {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #2b9b4d;
-}
-
-/* Footer de la card (botones) */
-.card_footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.75rem;
-  padding: 0.7rem 1rem 1rem;
-  margin-top: auto;
-  border-top: 1px solid #f0ecff;
-}
-
-/* ========= BOTONES LOCALES DE ESTA VISTA ========= */
-
-.btn {
-  border-radius: 999px;
-  border: none;
-  padding: 0.45rem 1.1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-}
-
-.btn--primary {
-  background: #6c3ef0;
-  color: #ffffff;
-  box-shadow: 0 6px 16px rgba(80, 37, 215, 0.4);
-}
-
-.btn--primary:hover {
-  background: #5b2fe0;
-}
-
-.btn--ghost {
-  background: #f3edff;
-  color: #5b2fe0;
-}
-
-.btn--ghost:hover {
-  background: #e6dcff;
-}
-
-/* Mobile ajustes */
+/* Móviles */
 @media (max-width: 600px) {
-  .card_image img {
-    height: 170px;
+  .hero {
+    padding: 32px 1.25rem 24px;
   }
 
-  .card_footer {
-    justify-content: space-between;
+  .section,
+  .categorias-section,
+  .productos-section {
+    padding: 24px 1.25rem;
+  }
+
+  .categorias-section h2,
+  .productos-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .producto-card img {
+    height: 160px;
   }
 }

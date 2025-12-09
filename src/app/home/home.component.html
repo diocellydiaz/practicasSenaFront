@@ -1,55 +1,54 @@
-<!-- Hero / Portada cliente -->
 <section class="hero">
-  <div class="hero__content">
-    <h1>Jabones Artesanales hechos con amor 🧼💜</h1>
-    <p>
-      Descubre jabones naturales, suaves con tu piel y perfectos para consentirte
-      o para regalar a quien más quieres.
-    </p>
-    <button class="btn btn--primary" routerLink="/producto">
-      Ver catálogo completo
-    </button>
+  <div class="hero__text">
+    <h1>Jabones Artesanales<br> Naturales</h1>
+    <p>Productos hechos a mano para el cuidado de tu piel.</p>
+    <button class="btn-primary">Ver Catálogo</button>
   </div>
 
   <div class="hero__image">
-    <img src="assets/Beneficios-del-jabon-artesanal.jpg" alt="Jabones artesanales" />
+    <img src="assets/hand-soap.png" alt="Jabón artesanal">
   </div>
 </section>
 
-<!-- Sección de promociones (vista cliente) -->
-<section class="promos container">
-  <header class="section-header">
-    <h2>Promociones destacadas para ti ✨</h2>
-    <a [routerLink]="'/producto'" class="link">Ver todo</a>
-  </header>
+<section class="categorias-section">
+  <h2>Categorías</h2>
 
-  <div class="grid">
-    <article class="card" *ngFor="let p of promos; trackBy: trackById">
-      <div class="card_image">
-        <img [src]="p.image" [alt]="p.title" loading="lazy" />
-        <span class="badge" *ngIf="p.badge as b">{{ b }}</span>
-      </div>
+  <div class="categorias-grid">
+    <div class="categoria-card">
+      <img src="assets/icons/body.png"> 
+      <p>Jabones corporales</p>
+    </div>
 
-      <div class="card_body">
-        <h3 class="card_title">{{ p.title }}</h3>
-        <p class="card_subtitle" *ngIf="p.subtitle">{{ p.subtitle }}</p>
-        <p class="card_price" *ngIf="p.precio !== null && p.precio !== undefined">
-          {{ p.precio | currency:'COP':'symbol-narrow':'1.0-0' }}
-        </p>
-      </div>
+    <div class="categoria-card">
+      <img src="assets/icons/face.png">
+      <p>Jabones faciales</p>
+    </div>
 
-      <div class="card_footer">
-        <a [routerLink]="p.link || '/producto'" class="btn btn--ghost">
-          Ver detalle
-        </a>
-        <button
-          class="btn btn--primary"
-          type="button"
-          (click)="addToCart(p)"
-        >
-          Agregar
-        </button>
-      </div>
-    </article>
+    <div class="categoria-card">
+      <img src="assets/icons/gift.png">
+      <p>Kits de regalo</p>
+    </div>
+
+    <div class="categoria-card">
+      <img src="assets/icons/scrub.png">
+      <p>Jabones exfoliantes</p>
+    </div>
+  </div>
+</section>
+
+<section class="productos-section">
+  <h2>Productos destacados</h2>
+
+  <div class="productos-grid">
+
+    <div *ngFor="let p of productos" class="producto-card">
+      <img [src]="p.nombre_foto" alt="{{ p.nombre }}">
+
+      <h3>{{ p.nombre }}</h3>
+      <p class="precio">€{{ p.precio }}</p>
+
+      <button class="btn-primary">Agregar al carrito</button>
+    </div>
+
   </div>
 </section>

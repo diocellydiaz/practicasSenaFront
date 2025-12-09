@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
 import { Producto } from '../interfaces/producto.interface';
 import { CartService } from '../services/cart-service.service';
+import { ProductoService } from '../services/producto/producto.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -10,24 +12,23 @@ import { CartService } from '../services/cart-service.service';
 })
 export class HomeComponent implements OnInit {
 
-  promos: Producto[] = [];
+  productos: Producto[] = [];
 
-  trackById(_: number, item: Producto) { return item.id; }
-
-  constructor( private cart: CartService) {}
-
-  addToCart(p: any) {
-    this.cart.add({
-      id: p.id,
-      title: p.title,
-      price: p.price || 0,
-      image: p.image
-    }, 1);
-  }
-
-
+  constructor(
+    private productoService: ProductoService,
+    private destroyRef: DestroyRef
+  ) {}
 
   ngOnInit(): void {
-    // Aquí podrías cargar datos dinámicamente si luego usas un servicio
+    this.cargarProductos();
+  }
+
+  private cargarProductos(): void {
+    this.productoService.getProductos()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (data) => this.productos = data,
+        error: (err) => console.error("Error cargando productos", err)
+      });
   }
 }
