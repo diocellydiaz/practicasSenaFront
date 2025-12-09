@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  DestroyRef,
+} from '@angular/core';
 import { Producto } from '../interfaces/producto.interface';
 import { CartService } from '../services/cart-service.service';
 import { ProductoService } from '../services/producto/producto.service';
@@ -8,11 +13,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-
   productosDestacados: Producto[] = [];
+
 
   constructor(
     private productoService: ProductoService,
@@ -22,19 +27,21 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.cargarProductos();
   }
-
   private cargarProductos(): void {
-    this.productoService.getProductos()
+    this.productoService
+      .getProductos()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (data) => {
-          console.log('Productos desde backend:', data);
-          this.productosDestacados = data;
+        next: (items) => {
+          console.log('Productos desde backend:', items);
+          this.productosDestacados = items;
         },
-        error: (err) => {
-          console.error('Error cargando productos:', err);
-          this.productosDestacados = [];
-        }
+        error: (err) => console.error('Error al obtener los productos:', err),
       });
+  }
+
+  trackById(_: number, p: Producto) {
+    // para soportar productos de BD (productoid) y mocks (id)
+    return p.productoid ?? p.id;
   }
 }
