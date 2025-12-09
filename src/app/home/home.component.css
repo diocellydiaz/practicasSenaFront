@@ -3,18 +3,11 @@
   background: #f7f5ff;
   min-height: 100vh;
   color: #221437;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
-/* ===== CONTENEDOR GENERAL ===== */
-.section {
-  padding: 40px 5vw;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* ================= HERO ================= */
-
+/* ===== HERO ===== */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -66,11 +59,15 @@
   box-shadow: 0 18px 40px rgba(77, 54, 160, 0.35);
 }
 
-/* ================= CATEGORÍAS ================= */
+/* ===== SECCIONES GENERALES ===== */
 
-.categorias-section {
-  mask-composite: section;
+.section {
+  padding: 40px 5vw;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+/* ===== CATEGORÍAS ===== */
 
 .categorias-section h2,
 .productos-section h2 {
@@ -93,10 +90,8 @@
   box-shadow: 0 8px 20px rgba(31, 10, 80, 0.08);
 }
 
-.categoria-card img {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
+.categoria-icon {
+  font-size: 2rem;
   margin-bottom: 0.6rem;
 }
 
@@ -106,11 +101,15 @@
   color: #352855;
 }
 
-/* ================= PRODUCTOS ================= */
+/* ===== PRODUCTOS ===== */
 
 .productos-section {
-  mask-composite: section;
   padding-bottom: 60px;
+}
+
+.empty {
+  font-size: 0.95rem;
+  color: #7a718f;
 }
 
 .productos-grid {
@@ -152,14 +151,12 @@
   color: #2fac57;
 }
 
-/* el botón de la card ocupa todo el ancho en móvil */
 .producto-card .btn-primary {
   width: 100%;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ===== RESPONSIVE ===== */
 
-/* Tablets y pantallas medianas */
 @media (max-width: 900px) {
   .hero {
     flex-direction: column;
@@ -178,15 +175,12 @@
   }
 }
 
-/* Móviles */
 @media (max-width: 600px) {
   .hero {
     padding: 32px 1.25rem 24px;
   }
 
-  .section,
-  .categorias-section,
-  .productos-section {
+  .section {
     padding: 24px 1.25rem;
   }
 

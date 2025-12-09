@@ -27,8 +27,14 @@ export class HomeComponent implements OnInit {
     this.productoService.getProductos()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (data) => this.productos = data,
-        error: (err) => console.error("Error cargando productos", err)
+        next: (data) => {
+          console.log('Productos desde backend:', data);
+          this.productos = data;
+        },
+        error: (err) => {
+          console.error('Error cargando productos:', err);
+          this.productos = [];
+        }
       });
   }
 }

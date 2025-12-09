@@ -1,54 +1,69 @@
+<!-- HERO -->
 <section class="hero">
   <div class="hero__text">
-    <h1>Jabones Artesanales<br> Naturales</h1>
+    <h1>Jabones Artesanales<br />Naturales</h1>
     <p>Productos hechos a mano para el cuidado de tu piel.</p>
     <button class="btn-primary">Ver Catálogo</button>
   </div>
 
   <div class="hero__image">
-    <img src="assets/hand-soap.png" alt="Jabón artesanal">
+    <!-- Usa una imagen que tengas en /assets -->
+    <img src="assets/Beneficios-del-jabon-artesanal.jpg" alt="Jabón artesanal" />
   </div>
 </section>
 
-<section class="categorias-section">
+<!-- CATEGORÍAS -->
+<section class="section categorias-section">
   <h2>Categorías</h2>
 
   <div class="categorias-grid">
     <div class="categoria-card">
-      <img src="assets/icons/body.png"> 
+      <div class="categoria-icon">🧴</div>
       <p>Jabones corporales</p>
     </div>
 
     <div class="categoria-card">
-      <img src="assets/icons/face.png">
+      <div class="categoria-icon">🙂</div>
       <p>Jabones faciales</p>
     </div>
 
     <div class="categoria-card">
-      <img src="assets/icons/gift.png">
+      <div class="categoria-icon">🎁</div>
       <p>Kits de regalo</p>
     </div>
 
     <div class="categoria-card">
-      <img src="assets/icons/scrub.png">
+      <div class="categoria-icon">🧽</div>
       <p>Jabones exfoliantes</p>
     </div>
   </div>
 </section>
 
-<section class="productos-section">
+<!-- PRODUCTOS DESTACADOS -->
+<section class="section productos-section">
   <h2>Productos destacados</h2>
 
-  <div class="productos-grid">
+  <!-- mensaje si no hay productos -->
+  <p *ngIf="productos.length === 0" class="empty">
+    No hay productos para mostrar o no se pudieron cargar.
+  </p>
 
-    <div *ngFor="let p of productos" class="producto-card">
-      <img [src]="p.nombre_foto" alt="{{ p.nombre }}">
+  <!-- grid de productos -->
+  <div *ngIf="productos.length > 0" class="productos-grid">
+    <article class="producto-card" *ngFor="let p of productos">
+      <img
+        [src]="p.nombre_foto || 'assets/Beneficios-del-jabon-artesanal.jpg'"
+        [alt]="p.nombre"
+      />
 
       <h3>{{ p.nombre }}</h3>
-      <p class="precio">€{{ p.precio }}</p>
+      <p class="precio">
+        {{ p.precio | currency:'COP':'symbol-narrow':'1.0-0' }}
+      </p>
 
-      <button class="btn-primary">Agregar al carrito</button>
-    </div>
-
+      <button class="btn-primary">
+        Agregar al carrito
+      </button>
+    </article>
   </div>
 </section>
