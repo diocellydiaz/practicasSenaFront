@@ -44,13 +44,13 @@
   <h2>Productos destacados</h2>
 
   <!-- mensaje si no hay productos -->
-  <p *ngIf="productos.length === 0" class="empty">
+  <p *ngIf="productosDestacados.length === 0" class="empty">
     No hay productos para mostrar o no se pudieron cargar.
-  </p>
+  </p> 
 
   <!-- grid de productos -->
-  <div *ngIf="productos.length > 0" class="productos-grid">
-    <article class="producto-card" *ngFor="let p of productos">
+  <div *ngIf="productosDestacados.length > 0" class="productos-grid">
+    <article class="producto-card" *ngFor="let p of productosDestacados">
       <img
         [src]="p.nombre_foto || 'assets/Beneficios-del-jabon-artesanal.jpg'"
         [alt]="p.nombre"

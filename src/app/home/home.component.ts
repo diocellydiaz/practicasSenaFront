@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class HomeComponent implements OnInit {
 
-  productos: Producto[] = [];
+  productosDestacados: Producto[] = [];
 
   constructor(
     private productoService: ProductoService,
@@ -29,11 +29,11 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log('Productos desde backend:', data);
-          this.productos = data;
+          this.productosDestacados = data;
         },
         error: (err) => {
           console.error('Error cargando productos:', err);
-          this.productos = [];
+          this.productosDestacados = [];
         }
       });
   }
