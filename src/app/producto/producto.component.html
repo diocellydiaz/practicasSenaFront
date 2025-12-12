@@ -17,7 +17,7 @@
         <!-- Imagen: nombre_foto (BD) o image (mock) -->
         <div class="card_image">
           <img
-            [src]="p.nombre_foto ? 'assets/' + p.nombre_foto : (p.image || 'assets/Beneficios-del-jabon-artesanal.jpg')"
+            [src]="p.nombre_foto ? 'assets/' + p.nombre_foto : (p.image )"
             [alt]="p.nombre || p.title || 'Producto'" />
           <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
         </div>

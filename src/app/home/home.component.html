@@ -66,7 +66,7 @@
   <!-- grid de productos -->
   <div *ngIf="productosDestacados.length > 0" class="productos-grid">
     <article class="producto-card" *ngFor="let p of productosDestacados; trackBy: trackById">
-      <img [src]="p.nombre_foto || 'assets/Beneficios-del-jabon-artesanal.jpg'" [alt]="p.nombre" />
+      <img [src]="p.nombre_foto " [alt]="p.nombre" />
 
       <h3>{{ p.nombre }}</h3>
       <p class="precio">
