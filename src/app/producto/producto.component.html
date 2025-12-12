@@ -18,8 +18,7 @@
         <div class="card_image">
           <img
             [src]="p.nombre_foto ? 'assets/' + p.nombre_foto : (p.image || 'assets/Beneficios-del-jabon-artesanal.jpg')"
-            [alt]="p.nombre || p.title || 'Producto'"
-          />
+            [alt]="p.nombre || p.title || 'Producto'" />
           <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
         </div>
 
@@ -49,14 +48,9 @@
         </div>
 
         <!-- Acciones (si quieres modo admin aquí) -->
-        <div class="card_footer">
-          <button class="btn btn--ghost" type="button" (click)="editarProducto(p)">
-            Editar
-          </button>
-          <button class="btn btn--danger" type="button" (click)="eliminarProducto(p)">
-            Eliminar
-          </button>
-        </div>
+        <button class="btn-primary">
+          Agregar al carrito
+        </button>
       </article>
     </div>
   </div>
