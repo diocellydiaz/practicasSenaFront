@@ -14,26 +14,43 @@
 <!-- CATEGORÍAS -->
 <section class="section categorias-section">
   <h2>Categorías</h2>
-  <div>
-    <div class="categoria-card" [routerLink]="['/productos']" [queryParams]="{ categoria: 'corporales' }">
+
+  <div class="categorias-grid">
+    <a
+      class="categoria-card"
+      routerLink="/productos"
+      [queryParams]="{ categoria: 'corporales' }"
+    >
       <div class="categoria-icon">🧴</div>
       <p>Jabones corporales</p>
-    </div>
+    </a>
 
-    <div class="categoria-card" [routerLink]="['/productos']" [queryParams]="{ categoria: 'faciales' }">
+    <a
+      class="categoria-card"
+      routerLink="/productos"
+      [queryParams]="{ categoria: 'faciales' }"
+    >
       <div class="categoria-icon">🙂</div>
       <p>Jabones faciales</p>
-    </div>
+    </a>
 
-    <div class="categoria-card" [routerLink]="['/productos']" [queryParams]="{ categoria: 'kits' }">
+    <a
+      class="categoria-card"
+      routerLink="/productos"
+      [queryParams]="{ categoria: 'kits' }"
+    >
       <div class="categoria-icon">🎁</div>
       <p>Kits de regalo</p>
-    </div>
+    </a>
 
-    <div class="categoria-card" [routerLink]="['/productos']" [queryParams]="{ categoria: 'exfoliantes' }">
+    <a
+      class="categoria-card"
+      routerLink="/productos"
+      [queryParams]="{ categoria: 'exfoliantes' }"
+    >
       <div class="categoria-icon">🧽</div>
       <p>Jabones exfoliantes</p>
-    </div>
+    </a>
   </div>
 </section>
 
