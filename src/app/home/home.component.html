@@ -3,7 +3,7 @@
   <div class="hero__text">
     <h1>Jabones Artesanales<br />Naturales</h1>
     <p>Productos hechos a mano para el cuidado de tu piel.</p>
-    <button class="btn-primary">Ver Catálogo</button>
+    <button class="btn-primary" (click)="irACatalogo()" >Ver Catálogo</button>
   </div>
 
   <div class="hero__image">
@@ -16,22 +16,22 @@
   <h2>Categorías</h2>
 
   <div class="categorias-grid">
-    <div class="categoria-card">
+    <div class="categoria-card" (click)="irACategoria('corporales')" >
       <div class="categoria-icon">🧴</div>
       <p>Jabones corporales</p>
     </div>
 
-    <div class="categoria-card">
+    <div class="categoria-card" (click)="irACategoria('faciales')" >
       <div class="categoria-icon">🙂</div>
       <p>Jabones faciales</p>
     </div>
 
-    <div class="categoria-card">
+    <div class="categoria-card" (click)="irACategoria('kits')" >
       <div class="categoria-icon">🎁</div>
       <p>Kits de regalo</p>
     </div>
 
-    <div class="categoria-card">
+    <div class="categoria-card" (click)="irACategoria('exfoliantes')" >
       <div class="categoria-icon">🧽</div>
       <p>Jabones exfoliantes</p>
     </div>
