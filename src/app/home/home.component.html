@@ -1,81 +1,92 @@
-<!-- HERO -->
-<section class="hero">
-  <div class="hero__text">
-    <h1>Jabones Artesanales<br />Naturales</h1>
-    <p>Productos hechos a mano para el cuidado de tu piel.</p>
-    <button class="btn-primary" type="button" (click)="irACatalogo()">Ver Catálogo</button>
-  </div>
+<div class="home">
+  <!-- HERO PRINCIPAL -->
+  <section class="hero">
+    <div class="hero__text">
+      <h1>
+        Jabones<br />
+        Artesanales<br />
+        Naturales
+      </h1>
 
-  <div class="hero__image">
-    <img src="assets/Beneficios-del-jabon-artesanal.jpg" alt="Jabón artesanal" />
-  </div>
-</section>
-
-<!-- CATEGORÍAS -->
-<section class="section categorias-section">
-  <h2>Categorías</h2>
-
-  <div class="categorias-grid">
-    <a
-      class="categoria-card"
-      routerLink="/productos"
-      [queryParams]="{ categoria: 'corporales' }"
-    >
-      <div class="categoria-icon">🧴</div>
-      <p>Jabones corporales</p>
-    </a>
-
-    <a
-      class="categoria-card"
-      routerLink="/productos"
-      [queryParams]="{ categoria: 'faciales' }"
-    >
-      <div class="categoria-icon">🙂</div>
-      <p>Jabones faciales</p>
-    </a>
-
-    <a
-      class="categoria-card"
-      routerLink="/productos"
-      [queryParams]="{ categoria: 'kits' }"
-    >
-      <div class="categoria-icon">🎁</div>
-      <p>Kits de regalo</p>
-    </a>
-
-    <a
-      class="categoria-card"
-      routerLink="/productos"
-      [queryParams]="{ categoria: 'exfoliantes' }"
-    >
-      <div class="categoria-icon">🧽</div>
-      <p>Jabones exfoliantes</p>
-    </a>
-  </div>
-</section>
-
-<!-- PRODUCTOS DESTACADOS -->
-<section class="section productos-section">
-  <h2>Productos destacados</h2>
-
-  <!-- mensaje si no hay productos -->
-  <p *ngIf="productosDestacados.length === 0" class="empty">
-    No hay productos para mostrar o no se pudieron cargar.
-  </p>
-
-  <!-- grid de productos -->
-  <div *ngIf="productosDestacados.length > 0" class="productos-grid">
-    <article class="producto-card" *ngFor="let p of productosDestacados; trackBy: trackById">
-      <img [src]="'/' + p.nombrefoto" [alt]="p.nombre" />
-
-      <h3>{{ p.nombre }}</h3>
-      <p class="precio">
-        {{ p.precio | currency: 'COP':'symbol-narrow':'1.0-0' }}
+      <p class="hero__subtitle">
+        Productos hechos a mano para el cuidado de tu piel.
       </p>
 
-      <button class="btn-primary">
-        Agregar al carrito
+      <button
+        class="btn-primary"
+        type="button"
+        routerLink="/productos"
+      >
+        Ver Catálogo
       </button>
-    </article>
-  </div>
-</section>
+    </div>
+
+    <div class="hero__image-wrapper">
+      <img
+        src="assets/Beneficios-del-jabon-artesanal.jpg"
+        alt="Jabón artesanal"
+        class="hero__image"
+      />
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <section class="section categorias-section">
+    <h2>Categorías</h2>
+
+    <p *ngIf="categorias.length === 0" class="empty">
+      Aún no hay categorías configuradas.
+    </p>
+
+    <div *ngIf="categorias.length > 0" class="categorias-grid">
+      <a
+        class="categoria-card"
+        *ngFor="let c of categorias; trackBy: trackByCategoriaId"
+        [routerLink]="['/categorias', c.id]"
+      >
+        <div class="categoria-icon">
+          <span>{{ c.icono || '🧴' }}</span>
+        </div>
+        <p>{{ c.nombre }}</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="section productos-section">
+    <h2>Productos destacados</h2>
+
+    <p *ngIf="productosDestacados.length === 0" class="empty">
+      No hay productos para mostrar o no se pudieron cargar.
+    </p>
+
+    <div
+      *ngIf="productosDestacados.length > 0"
+      class="productos-grid"
+    >
+      <article
+        class="producto-card"
+        *ngFor="let p of productosDestacados; trackBy: trackByProductoId"
+      >
+        <img
+          [src]="p.nombrefoto || 'assets/Beneficios-del-jabon-artesanal.jpg'"
+          [alt]="p.nombre"
+        />
+
+        <h3>{{ p.nombre }}</h3>
+
+        <p class="descripcion-producto">
+          {{ p.descripcion }}
+        </p>
+
+        <p class="precio">
+          {{ p.precio | currency: 'COP': 'symbol-narrow':'1.0-0' }}
+        </p>
+
+        <button type="button" class="btn-primary">
+          Agregar al carrito
+        </button>
+      </article>
+    </div>
+  </section>
+</div>

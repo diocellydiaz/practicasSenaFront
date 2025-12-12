@@ -1,14 +1,10 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  DestroyRef,
-} from '@angular/core';
-import { Producto } from '../interfaces/producto.interface';
-import { ProductoService } from '../services/producto/producto.service';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+
+import { Producto } from '../interfaces/producto.interface';
 import { Categoria } from '../interfaces/categoria.interface';
+
+import { ProductoService } from '../services/producto/producto.service';
 import { CategoriaService } from '../services/categoria/categoria.service';
 
 @Component({
@@ -17,59 +13,61 @@ import { CategoriaService } from '../services/categoria/categoria.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  productosDestacados: Producto[] = [];
+  // categorías desde el backend
   categorias: Categoria[] = [];
 
+  // productos destacados
+  productosDestacados: Producto[] = [];
 
   constructor(
     private productoService: ProductoService,
-    private destroyRef: DestroyRef,
     private categoriaService: CategoriaService,
-    private router: Router
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
-    this.cargarProductos();
+    this.cargarCategorias();
+    this.cargarProductosDestacados();
   }
-  private cargarProductos(): void {
+
+  private cargarCategorias(): void {
+    this.categoriaService
+      .getCategorias()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (cats) => {
+          console.log('Categorías desde backend', cats);
+          this.categorias = cats;
+        },
+        error: (err) => {
+          console.error('Error cargando categorías', err);
+          this.categorias = [];
+        },
+      });
+  }
+
+  private cargarProductosDestacados(): void {
     this.productoService
       .getProductos()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (items) => {
-          console.log('Productos desde backend:', items);
-          this.productosDestacados = items;
+          console.log('Productos desde backend', items);
+          // toma los primeros 4 como destacados
+          this.productosDestacados = items.slice(0, 4);
         },
-        error: (err) => console.error('Error al obtener los productos:', err),
+        error: (err) => {
+          console.error('Error cargando productos destacados', err);
+          this.productosDestacados = [];
+        },
       });
   }
 
-  trackById(_: number, p: Producto) {
-    // para soportar productos de BD (productoid) y mocks (id)
-    return p.productoid ?? p.id;
+  trackByProductoId(_: number, p: Producto) {
+    return (p as any).productoid ?? (p as any).id;
   }
 
-  irACatalogo(): void{
-    this.router.navigate(['/productos']);
+  trackByCategoriaId(_: number, c: Categoria) {
+    return c.id;
   }
-
-  irACategoria(categoria: string): void{
-    this.router.navigate(['/productos'], {
-      queryParams: {categoria}
-    })
-  }
-
-  private cargarCategorias(): void {
-    this.categoriaService.getCategorias()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: cats => {
-          console.log('Categorías desde backend', cats);
-          this.categorias = cats;
-        },
-        error: err => console.error('Error cargando categorías', err)
-      });
-  }
-
-
 }
