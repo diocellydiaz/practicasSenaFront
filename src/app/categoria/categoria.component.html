@@ -1,1 +1,53 @@
-<p>categoria works!</p>
+<!-- HERO DE LA CATEGORÍA -->
+<section class="categoria-hero" *ngIf="categoria">
+  <div class="categoria-hero__text">
+    <p class="breadcrumb">
+      <a routerLink="/">Inicio</a> · Categorías · {{ categoria.nombre }}
+    </p>
+
+    <h1>{{ categoria.nombre }}</h1>
+    <p class="descripcion">
+      {{ categoria.descripcion }}
+    </p>
+  </div>
+
+  <div class="categoria-hero__icon">
+    <!-- usamos el icono que viene de la BD; si no hay, dejamos uno por defecto -->
+    <span>{{ categoria.icono || '🧴' }}</span>
+  </div>
+</section>
+
+<!-- PRODUCTOS DE ESA CATEGORÍA -->
+<section class="section productos-section">
+  <h2>Productos en esta categoría</h2>
+
+  <p *ngIf="productos.length === 0" class="empty">
+    Aún no hay productos registrados para esta categoría.
+  </p>
+
+  <div *ngIf="productos.length > 0" class="productos-grid">
+    <article
+      class="producto-card"
+      *ngFor="let p of productos; trackBy: trackById"
+    >
+      <img
+        [src]="p.nombrefoto || 'assets/Beneficios-del-jabon-artesanal.jpg'"
+        [alt]="p.nombre"
+      />
+
+      <h3>{{ p.nombre }}</h3>
+
+      <p class="descripcion-producto">
+        {{ p.descripcion }}
+      </p>
+
+      <p class="precio">
+        {{ p.precio | currency: 'COP':'symbol-narrow':'1.0-0' }}
+      </p>
+
+      <button type="button" class="btn-primary">
+        Agregar al carrito
+      </button>
+    </article>
+  </div>
+</section>

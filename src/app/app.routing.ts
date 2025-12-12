@@ -10,12 +10,14 @@ import { ProveedorComponent } from './proveedor/proveedor.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { CategoriaComponent } from './categoria/categoria.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' }, // Home
 
   // Rutas “planas” en minúscula (coinciden con tus routerLink)
   { path: 'producto', component: ProductoComponent },
+  { path: 'categorias/:id', component: CategoriaComponent },
   { path: 'clientes', component: ClienteComponent },
   { path: 'pedidos', component: PedidoComponent },      // antes 'iniciar'
   { path: 'envio', component: EnvioComponent },         // antes 'Envio'

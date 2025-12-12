@@ -36,4 +36,10 @@ export class ProductoService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
+  getProductosPorCategoria(categoriaId: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.baseUrl}/categoria/${categoriaId}`);
+  }
+
+
+
 }

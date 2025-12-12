@@ -8,6 +8,8 @@ import { Producto } from '../interfaces/producto.interface';
 import { ProductoService } from '../services/producto/producto.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { Categoria } from '../interfaces/categoria.interface';
+import { CategoriaService } from '../services/categoria/categoria.service';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +18,13 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   productosDestacados: Producto[] = [];
+  categorias: Categoria[] = [];
 
 
   constructor(
     private productoService: ProductoService,
     private destroyRef: DestroyRef,
+    private categoriaService: CategoriaService,
     private router: Router
   ) {}
 
@@ -53,6 +57,18 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/productos'], {
       queryParams: {categoria}
     })
+  }
+
+  private cargarCategorias(): void {
+    this.categoriaService.getCategorias()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: cats => {
+          console.log('Categorías desde backend', cats);
+          this.categorias = cats;
+        },
+        error: err => console.error('Error cargando categorías', err)
+      });
   }
 
 
