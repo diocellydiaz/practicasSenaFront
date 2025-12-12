@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { HomeComponent } from './home/home.component';
+import { CategoriaComponent } from './categoria/categoria.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     QuienesSomosComponent,
-    HomeComponent
+    HomeComponent,
+    CategoriaComponent
   ],
   imports: [
     BrowserModule,

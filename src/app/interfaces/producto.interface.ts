@@ -5,7 +5,7 @@ export interface Producto {
   productoid?: number;
   descripcion?: string;
   nombre: string;
-  nombre_foto?: string;
+  nombrefoto?: string;
   precio: number;
   categoriaid?: number;
   clienteid?: number;
