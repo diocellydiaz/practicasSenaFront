@@ -6,6 +6,8 @@ import { Categoria } from '../interfaces/categoria.interface';
 
 import { ProductoService } from '../services/producto/producto.service';
 import { CategoriaService } from '../services/categoria/categoria.service';
+import { CartItem } from '../interfaces/cart.interface';
+import { CartService } from '../services/cart-service.service';
 
 @Component({
   selector: 'app-home',
@@ -18,10 +20,12 @@ export class HomeComponent implements OnInit {
 
   // productos destacados
   productosDestacados: Producto[] = [];
+ 
 
   constructor(
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
+    private cartService: CartService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -70,4 +74,19 @@ export class HomeComponent implements OnInit {
   trackByCategoriaId(_: number, c: Categoria) {
     return c.id;
   }
+
+  agregarAlCarrito(p: any) {
+  const item: CartItem = {
+    id: p.productoid,          // o productoid / id según tu modelo
+    title: p.nombre,
+    price: Number(p.precio),
+    image: p.nombrefoto,       // o nombre_foto según tu JSON
+    qty: 1
+  };
+
+  this.cartService.add(item);
+  }
+
+
+
 }

@@ -2,47 +2,68 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { CartItem } from '../interfaces/cart.interface';
 
-
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly KEY = 'cart';
+
   private itemsSubject = new BehaviorSubject<CartItem[]>(this.load());
   items$ = this.itemsSubject.asObservable();
 
+  // total de unidades (sumatoria de qty)
   count$ = this.items$.pipe(
     map(items => items.reduce((acc, i) => acc + i.qty, 0))
   );
 
+  // total en dinero
   total$ = this.items$.pipe(
-    map(items => items.reduce((acc, i) => acc + (i.qty * i.price), 0))
+    map(items => items.reduce((acc, i) => acc + i.price * i.qty, 0))
   );
 
-  add(item: Omit<CartItem, 'qty'>, qty = 1) {
+  /** Devuelve el estado actual (sync) */
+  get snapshot(): CartItem[] {
+    return this.itemsSubject.value;
+  }
+
+  /** Agrega 1 unidad (o qty) al carrito; si existe, suma qty */
+  add(item: CartItem): void {
     const items = [...this.itemsSubject.value];
     const idx = items.findIndex(i => i.id === item.id);
-    if (idx > -1) items[idx] = { ...items[idx], qty: items[idx].qty + qty };
-    else items.push({ ...item, qty });
+
+    if (idx >= 0) {
+      items[idx] = { ...items[idx], qty: items[idx].qty + (item.qty ?? 1) };
+    } else {
+      items.push({ ...item, qty: item.qty ?? 1 });
+    }
+
     this.persist(items);
   }
 
-  increment(id: number) {
-    this.updateQty(id, +1);
-  }
-  decrement(id: number) {
-    this.updateQty(id, -1);
-  }
-  remove(id: number) {
+  /** Elimina un item completamente */
+  remove(id: number): void {
     const items = this.itemsSubject.value.filter(i => i.id !== id);
     this.persist(items);
   }
-  clear() {
+
+  /** Vacía el carrito */
+  clear(): void {
     this.persist([]);
   }
 
-  private updateQty(id: number, delta: number) {
+  /** Cambia la cantidad exacta */
+  setQty(id: number, qty: number): void {
+    const q = Math.max(1, qty);
     const items = this.itemsSubject.value.map(i =>
-      i.id === id ? { ...i, qty: Math.max(0, i.qty + delta) } : i
-    ).filter(i => i.qty > 0);
+      i.id === id ? { ...i, qty: q } : i
+    );
+    this.persist(items);
+  }
+
+  /** Incrementa / decrementa cantidad */
+  inc(id: number, delta: number = 1): void {
+    const items = this.itemsSubject.value
+      .map(i => (i.id === id ? { ...i, qty: i.qty + delta } : i))
+      .filter(i => i.qty > 0);
+
     this.persist(items);
   }
 
@@ -52,7 +73,10 @@ export class CartService {
   }
 
   private load(): CartItem[] {
-    try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); }
-    catch { return []; }
+    try {
+      return JSON.parse(localStorage.getItem(this.KEY) || '[]');
+    } catch {
+      return [];
+    }
   }
 }

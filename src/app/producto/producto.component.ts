@@ -2,6 +2,8 @@ import { Component, OnInit, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Producto } from '../interfaces/producto.interface';
 import { ProductoService } from '../services/producto/producto.service';
+import { CartService } from '../services/cart-service.service';
+import { CartItem } from '../interfaces/cart.interface';
 
 
 @Component({
@@ -15,6 +17,7 @@ export class ProductoComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
+    private cartService: CartService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -67,6 +70,16 @@ private cargarProductos(): void {
     console.log('Aquí iría la llamada para eliminar el producto con id:', id);
   }
 
+    agregarAlCarrito(p: any) {
+    const item: CartItem = {
+      id: p.productoid,          // o productoid / id según tu modelo
+      title: p.nombre,
+      price: Number(p.precio),
+      image: p.nombrefoto,       // o nombre_foto según tu JSON
+      qty: 1
+    };
   
+    this.cartService.add(item);
+    }
 
 }

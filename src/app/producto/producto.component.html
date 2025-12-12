@@ -16,9 +16,7 @@
       <article class="card" *ngFor="let p of productos; trackBy: trackById">
         <!-- Imagen: nombre_foto (BD) o image (mock) -->
         <div class="card_image">
-          <img
-            [src]="p.nombrefoto ? 'assets/' + p.nombrefoto : (p.image )"
-            [alt]="p.nombre || p.title || 'Producto'" />
+          <img [src]="p.nombrefoto ? 'assets/' + p.nombrefoto : (p.image )" [alt]="p.nombre || p.title || 'Producto'" />
           <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
         </div>
 
@@ -48,9 +46,10 @@
         </div>
 
         <!-- Acciones (si quieres modo admin aquí) -->
-        <button class="btn-primary">
+        <button class="btn-add-cart" (click)="agregarAlCarrito(productos)">
           Agregar al carrito
         </button>
+
       </article>
     </div>
   </div>

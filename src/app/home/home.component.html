@@ -83,7 +83,7 @@
           {{ p.precio | currency: 'COP': 'symbol-narrow':'1.0-0' }}
         </p>
 
-        <button type="button" class="btn-primary">
+        <button type="button" class="btn-primary" (click)="agregarAlCarrito(productosDestacados)">
           Agregar al carrito
         </button>
       </article>
