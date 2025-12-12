@@ -15,14 +15,14 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' }, // Home
 
   // Rutas “planas” en minúscula (coinciden con tus routerLink)
-  { path: 'producto', component: ProductoComponent },
-  { path: 'clientes', component: ClienteComponent },
-  { path: 'pedidos', component: PedidoComponent },      // antes 'iniciar'
-  { path: 'envio', component: EnvioComponent },         // antes 'Envio'
-  { path: 'proveedores', component: ProveedorComponent },// antes 'Proveedor'
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'quienes-somos', component: QuienesSomosComponent }, // antes 'app-quienes-somos'
+  { path: '/producto', component: ProductoComponent },
+  { path: '/clientes', component: ClienteComponent },
+  { path: '/pedidos', component: PedidoComponent },      // antes 'iniciar'
+  { path: '/envio', component: EnvioComponent },         // antes 'Envio'
+  { path: '/proveedores', component: ProveedorComponent },// antes 'Proveedor'
+  { path: '/login', component: LoginComponent },
+  { path: '/register', component: RegisterComponent },
+  { path: '/quienes-somos', component: QuienesSomosComponent }, // antes 'app-quienes-somos'
 
   // Wildcard: cualquier ruta desconocida → Home
   { path: '**', redirectTo: '' }
