@@ -12,17 +12,17 @@ export class HeaderComponent {
   titulo = 'Jabones Artesanales';
 
 
-  count$: Observable<number> = this.cart.count$;
-  items$: Observable<CartItem[]> = this.cart.items$;
-  total$: Observable<number> = this.cart.total$;
+  count$: Observable<number> = this.cartService.count$;
+  items$: Observable<CartItem[]> = this.cartService.items$;
+  total$: Observable<number> = this.cartService.total$;
 
-  constructor(private cart: CartService) {}
+  constructor(private cartService: CartService) {}
 
   trackById = (_: number, it: CartItem) => it.id;
 
-  increment(it: CartItem) { this.cart.increment(it.id); }
-  decrement(it: CartItem) { this.cart.decrement(it.id); }
-  remove(id: number) { this.cart.remove(id); }
-  clear() { this.cart.clear(); }
+  increment(it: CartItem) { this.cartService.increment(it.id); }
+  decrement(it: CartItem) { this.cartService.decrement(it.id); }
+  remove(id: number) { this.cartService.remove(id); }
+  clear() { this.cartService.clear(); }
 
 }

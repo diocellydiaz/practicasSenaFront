@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 
   // productos destacados
   productosDestacados: Producto[] = [];
- 
 
   constructor(
     private productoService: ProductoService,
@@ -76,17 +75,22 @@ export class HomeComponent implements OnInit {
   }
 
   agregarAlCarrito(p: any) {
-  const item: CartItem = {
-    id: p.productoid,          // o productoid / id según tu modelo
-    title: p.nombre,
-    price: Number(p.precio),
-    image: p.nombrefoto,       // o nombre_foto según tu JSON
-    qty: 1
-  };
+    const item: CartItem = {
+      id: p.productoid, // o productoid / id según tu modelo
+      title: p.nombre,
+      price: Number(p.precio),
+      image: p.nombrefoto, // o nombre_foto según tu JSON
+      qty: 1,
+    };
 
-  this.cartService.add(item);
+    this.cartService.add(item);
   }
 
+  incrementarItem(item: CartItem): void {
+    this.cartService.increment(item.id);
+  }
 
-
+  disminuirItem(item: CartItem): void {
+    this.cartService.decrement(item.id);
+  }
 }

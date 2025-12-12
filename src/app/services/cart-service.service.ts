@@ -4,10 +4,10 @@ import { CartItem } from '../interfaces/cart.interface';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private readonly KEY = 'cart';
+  private readonly KEY = 'cart';  // nombre clave en localStorage
 
-  private itemsSubject = new BehaviorSubject<CartItem[]>(this.load());
-  items$ = this.itemsSubject.asObservable();
+  private itemsSubject = new BehaviorSubject<CartItem[]>(this.load());  // inicializa el estado
+  items$ = this.itemsSubject.asObservable();  // observable para la vista
 
   // total de unidades (sumatoria de qty)
   count$ = this.items$.pipe(
@@ -58,13 +58,26 @@ export class CartService {
     this.persist(items);
   }
 
-  /** Incrementa / decrementa cantidad */
-  inc(id: number, delta: number = 1): void {
-    const items = this.itemsSubject.value
-      .map(i => (i.id === id ? { ...i, qty: i.qty + delta } : i))
-      .filter(i => i.qty > 0);
+  /** Incrementa cantidad */
+  increment(id: number): void {
+    const items = [...this.itemsSubject.value];
+    const item = items.find(i => i.id === id);
+    
+    if (item) {
+      item.qty += 1;
+      this.persist(items);
+    }
+  }
 
-    this.persist(items);
+  /** Disminuye cantidad */
+  decrement(id: number): void {
+    const items = [...this.itemsSubject.value];
+    const item = items.find(i => i.id === id);
+
+    if (item && item.qty > 1) {
+      item.qty -= 1;
+      this.persist(items);
+    }
   }
 
   private persist(items: CartItem[]) {
