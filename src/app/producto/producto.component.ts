@@ -16,7 +16,7 @@ export class ProductoComponent implements OnInit {
   constructor(
     private productoService: ProductoService,
     private cartService: CartService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit(): void {
@@ -87,5 +87,29 @@ export class ProductoComponent implements OnInit {
 
   disminuirItem(item: CartItem): void {
     this.cartService.decrement(item.id);
+  }
+
+  getImg(p: any): string {
+    const fallback = 'assets/Beneficios-del-jabon-artesanal.jpg';
+    const foto = (p?.nombrefoto || '').trim();
+
+    if (!foto) return fallback;
+
+    // Si ya viene como URL pública
+    if (foto.startsWith('http://') || foto.startsWith('https://')) return foto;
+
+    // Si viene con backslashes de Windows, los cambiamos
+    const clean = foto.replaceAll('\\', '/');
+
+    // Si ya viene como assets/...
+    if (clean.startsWith('assets/')) return clean;
+
+    // Si viene solo el nombre del archivo
+    return `assets/productos/${clean}`;
+  }
+
+  onImgError(ev: Event) {
+    (ev.target as HTMLImageElement).src =
+      'assets/Beneficios-del-jabon-artesanal.jpg';
   }
 }

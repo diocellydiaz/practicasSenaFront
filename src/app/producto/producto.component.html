@@ -16,7 +16,12 @@
       <article class="card" *ngFor="let p of productos; trackBy: trackById">
         <!-- Imagen: nombre_foto (BD) o image (mock) -->
         <div class="card_image">
-          <img [src]="p.nombrefoto ? 'assets/' + p.nombrefoto : (p.image )" [alt]="p.nombre || p.title || 'Producto'" />
+    
+          <img
+            [src]="getImg(p)"
+            [alt]="p.nombre"
+            (error)="onImgError($event)"
+          />
           <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
         </div>
 
