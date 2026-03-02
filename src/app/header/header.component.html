@@ -57,7 +57,12 @@
   <div class="offcanvas-body">
     <ng-container *ngIf="(items$ | async) as items; else emptyCart">
       <div *ngFor="let it of items; trackBy: trackById" class="cart-item">
-        <img [src]="it.image" alt="" />
+        <img
+          [src]="getImg(it)"
+          alt="producto"
+          (error)="onImgError($event)"
+        />
+
         <div class="flex-grow-1">
           <div class="title">{{ it.title }}</div>
           <div class="muted"> {{ it.price | currency:'COP':'symbol-narrow':'1.0-0' }} </div>
