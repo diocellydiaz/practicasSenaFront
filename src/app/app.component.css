@@ -9,6 +9,6 @@ app-root {
   min-height: 100vh;
 }
 
-main {
+.main-content {
   flex: 1; /* el contenido ocupa todo el espacio disponible */
 }
