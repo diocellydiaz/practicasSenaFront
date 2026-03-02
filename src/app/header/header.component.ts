@@ -34,18 +34,25 @@ export class HeaderComponent {
 
   getImg(it: any): string {
     const fallback = 'assets/Beneficios-del-jabon-artesanal.jpg';
+    const img = (it?.image || it?.nombrefoto || '').trim();
 
-    if (!it?.image) return fallback;
+    if (!img) return fallback;
 
-    // Si ya es URL completa
-    if (it.image.startsWith('http')) return it.image;
+    // si ya es URL pública
+    if (img.startsWith('http://') || img.startsWith('https://')) return img;
 
-    // Si solo viene el nombre del archivo
-    return `assets/productos/${it.image}`;
+    // si viene con backslashes de Windows, normaliza
+    const clean = img.replaceAll('\\', '/');
+
+    // si ya viene como assets/...
+    if (clean.startsWith('assets/')) return clean;
+
+    // si es solo el nombre del archivo
+    return `assets/productos/${clean}`;
   }
 
-  onImgError(event: Event) {
-    (event.target as HTMLImageElement).src =
+  onImgError(ev: Event) {
+    (ev.target as HTMLImageElement).src =
       'assets/Beneficios-del-jabon-artesanal.jpg';
   }
 }
